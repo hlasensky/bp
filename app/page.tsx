@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { callWebScraper } from "./front-end-actions";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
 	const [publications, setPublications] = useState<
@@ -29,7 +30,7 @@ export default function Home() {
 					});
 				}}
 			>
-				<input type="text" name="url" />
+				<Input type="text" name="url" />
 				<button type="submit">Scrape</button>
 			</form>
 			{publications && (
