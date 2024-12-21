@@ -8,6 +8,6 @@ export async function scrapeWeb(url: string) {
     if (content) {
         return content;
     } 
-    console.error("Scrape failed.");
+    console.error("Scraper actions: Scrape failed.");
     return null;
 }

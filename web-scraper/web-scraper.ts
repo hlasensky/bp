@@ -36,7 +36,7 @@ export async function scrape(url: string): Promise<Publications | null> {
 		});
 
 		if (links.length === 0) {
-			console.error("No links found in '.list-timeline'.");
+			console.error("Scraper: No links found in '.list-timeline'.");
 			return null;
 		}
 
@@ -60,7 +60,7 @@ export async function scrape(url: string): Promise<Publications | null> {
 						const contentGrid = document.querySelector(".b-detail__body div");
 
 						if (!contentGrid) {
-							console.error("No content found in '.b-detail__body div'.");
+							console.error("Scraper: No content found in '.b-detail__body div'.");
 							return { title, annotation, content: [] };
 						}
 
@@ -78,7 +78,7 @@ export async function scrape(url: string): Promise<Publications | null> {
 							if (subtitle && detail) {
 								content.push({ title: subtitle, content: detail });
 							} else {
-								console.warn(`Missing subtitle or detail at index ${i}`);
+								console.warn(`Scraper: Missing subtitle or detail at index ${i}`);
 							}
 						}
 
@@ -87,7 +87,7 @@ export async function scrape(url: string): Promise<Publications | null> {
 
 					return data;
 				} catch (err) {
-					console.error(`Failed to process ${link}:`, err);
+					console.error(`Scraper: Failed to process ${link}:`, err);
 				} finally {
 					await page.close();
 				}
@@ -95,7 +95,7 @@ export async function scrape(url: string): Promise<Publications | null> {
 		);
 		return data.filter((d) => d !== undefined) as Publications;
 	} catch (err) {
-		console.error("Error occurred during scraping:", err);
+		console.error("Scraper: Error occurred during scraping:", err);
 	} finally {
 		await browser.close();
 	}
