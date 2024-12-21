@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { callWebScraper } from "./front-end-actions";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 export default function Home() {
 	const [publications, setPublications] = useState<
@@ -25,7 +26,11 @@ export default function Home() {
 			Hi
 			<form
 				action={(data) => {
-					callWebScraper(data).then((content) => {
+          callWebScraper(data).then((content) => {
+            
+            if (!content) 
+              toast.error("Scrape failed.");
+            
 						setPublications(content);
 					});
 				}}
