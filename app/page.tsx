@@ -10,7 +10,7 @@ export default function Home() {
 		| [
 				{
 					title: string;
-					annotation: string;
+					annotation: { name: string; value: string }[] | string | null;
 					content: { title: string; content: string }[];
 				}
 		  ]
@@ -43,7 +43,15 @@ export default function Home() {
 					{publications.map((publication, i) => (
 						<div key={i} className="border-2 border-black rounded p-3 m-5">
 							<h2 className="text-xl font-semibold">{publication.title}</h2>
-							<p>{publication.annotation}</p>
+							{typeof publication.annotation === "string" ? (
+								<p>{publication.annotation}</p>
+							) : Array.isArray(publication.annotation) ? (
+								publication.annotation.map((ann, index) => (
+									<p key={index}>
+										{ann.name}: {ann.value}
+									</p>
+								))
+							) : null}
 							{publication.content.map((section, y) => (
 								<div key={y} className="my-2">
 									<h3 className="text-lg">{section.title}</h3>
